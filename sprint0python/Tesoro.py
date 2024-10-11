@@ -11,7 +11,7 @@ class Tesoro:
         opcion = random.randint(1, 3)
 
         if opcion == 1:
-            print("El héroe ha encontrado un tesoro: ataque")
+            print("\nEl héroe ha encontrado un tesoro: ataque")
 
             heroe.ataque = heroe.ataque + self.ataque
 

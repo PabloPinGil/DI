@@ -16,15 +16,19 @@ class Mazmorra:
         ronda = 0
         victoria = True
 
+        print("El héroe entra en la mazmorra")
+
         while ronda < len(self.monstruos):  # se ejecuta hasta matar a todos los enemigos o hasta que muera el héroe
-            print("El héroe entra en la mazmorra")
-            print("Te has encontrado con un " + self.monstruos[ronda].nombre)
+
+            print("\nTe has encontrado con un " + self.monstruos[ronda].nombre)
 
             while self.heroe.esta_vivo() and self.monstruos[ronda].esta_vivo():  # el combate dura hasta que
                 opcion_combate = self.enfrentar_enemigo(self.monstruos[ronda])  # uno de los dos muere
 
                 if self.monstruos[ronda].esta_vivo():
                     self.monstruos[ronda].atacar(self.heroe)
+                else:
+                    print("El monstruo ha sido derrotado")
 
                 if opcion_combate == 2:
                     self.heroe.reset_defensa()
@@ -38,16 +42,16 @@ class Mazmorra:
             ronda += 1
 
         if victoria:
-            print(f"¡{self.heroe.nombre} ha derrotado a todos los monstruos y ha conquistado la mazmorra!")
+            print(f"\n¡{self.heroe.nombre} ha derrotado a todos los monstruos y ha conquistado la mazmorra!")
         else:
-            print("El héroe ha sido derrotado en la mazmorra.")
+            print("\nEl héroe ha sido derrotado en la mazmorra.")
 
     def enfrentar_enemigo(self, enemigo):
         fin = False
         opcion = 0
 
         while not fin:
-            print("\n¿Que deseas hacer?"
+            print("\n\n¿Que deseas hacer?"
                   "\n1. Atacar"
                   "\n2. Defender"
                   "\n3. Curarse")
