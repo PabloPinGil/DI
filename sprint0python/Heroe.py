@@ -1,10 +1,10 @@
 class Heroe:
-    def __init__(self, nombre, ataque, defensa, salud, salud_maxima):
+    def __init__(self, nombre, ataque=20, defensa=15, salud=100):
         self.nombre = nombre
         self.ataque = ataque
         self.defensa = defensa
         self.salud = salud
-        self.salud_maxima = salud_maxima
+        self.salud_maxima = salud
 
     def atacar(self, enemigo):
         print("El héroe ataca a " + enemigo.nombre)
