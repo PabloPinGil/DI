@@ -10,7 +10,7 @@ class Heroe:
         print("El héroe ataca a " + enemigo.nombre)
 
         if self.ataque > enemigo.defensa:
-            print("El enemigo " + enemigo.nombre + " ha recibido " + str(self.ataque) + "puntos de daño.")
+            print("El enemigo " + enemigo.nombre + " ha recibido " + str(self.ataque) + " puntos de daño.")
             enemigo.salud = enemigo.salud - self.ataque
         else:
             print("El enemigo ha bloqueado el ataque.")

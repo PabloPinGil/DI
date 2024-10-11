@@ -2,7 +2,7 @@ import random
 
 
 class Monstruo:
-    def __init__(self, ataque=20, defensa=15, salud=100):
+    def __init__(self, ataque=20, defensa=15, salud=50):
         nombres = ["Orco", "Duende", "Esqueleto"]
 
         self.nombre = random.choice(nombres)
