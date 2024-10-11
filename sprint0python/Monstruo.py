@@ -16,7 +16,7 @@ class Monstruo:
             damage = self.ataque - heroe.defensa    # el daño que recibe el héroe es su defensa - el daño del monstruo
             heroe.salud = heroe.salud - damage
 
-            print("El héroe " + heroe.nombre + " ha recibido " + damage + " puntos de daño")
+            print("El héroe " + heroe.nombre + " ha recibido " + str(damage) + " puntos de daño")
         else:
             print("El héroe ha bloqueado el ataque")        # si su defensa es superior al daño lo bloquea
 
