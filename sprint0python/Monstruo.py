@@ -1,6 +1,11 @@
+import random
+
+
 class Monstruo:
-    def __init__(self, nombre, ataque, defensa, salud):
-        self.nombre = nombre
+    def __init__(self, ataque = 20, defensa = 15, salud = 100):
+        nombres = ["Orco", "Duende", "Esqueleto"]
+
+        self.nombre = random.choice(nombres)
         self.ataque = ataque
         self.defensa = defensa
         self.salud = salud
