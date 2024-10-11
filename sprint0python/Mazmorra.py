@@ -16,7 +16,7 @@ class Mazmorra:
         ronda = 0
         victoria = True
 
-        print("El héroe entra en la mazmorra")
+        print("\nEl héroe entra en la mazmorra")
 
         while ronda < len(self.monstruos):  # se ejecuta hasta matar a todos los enemigos o hasta que muera el héroe
 
@@ -51,7 +51,7 @@ class Mazmorra:
         opcion = 0
 
         while not fin:
-            print("\n\n¿Que deseas hacer?"
+            print("\n¿Que deseas hacer?"
                   "\n1. Atacar"
                   "\n2. Defender"
                   "\n3. Curarse")
@@ -75,5 +75,5 @@ class Mazmorra:
         return opcion
 
     def buscar_tesoro(self):
-        print("Buscando tesoro...")
+        print("\nBuscando tesoro...")
         self.tesoro.encontrar_tesoro(self.heroe)

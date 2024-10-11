@@ -15,14 +15,14 @@ class Tesoro:
 
             heroe.ataque = heroe.ataque + self.ataque
 
-            print("El ataque de " + heroe.nombre + "ha aumentado a " + str(heroe.ataque))
+            print("El ataque de " + heroe.nombre + " ha aumentado a " + str(heroe.ataque))
 
         elif opcion == 2:
             print("El héroe ha encontrado un tesoro: defensa")
 
             heroe.defensa = heroe.defensa + self.defensa
 
-            print("La defensa de " + heroe.nombre + "ha aumentado a " + str(heroe.defensa))
+            print("La defensa de " + heroe.nombre + " ha aumentado a " + str(heroe.defensa))
 
         else:
             print("El héroe ha encontrado un tesoro: salud")
@@ -31,4 +31,4 @@ class Tesoro:
             if heroe.salud > heroe.salud_maxima:
                 heroe.salud = heroe.salud_maxima
 
-            print("La salud de " + heroe.nombre + "ha aumentado a " + str(heroe.salud))
+            print("La salud de " + heroe.nombre + " ha aumentado a " + str(heroe.salud))
