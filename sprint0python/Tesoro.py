@@ -7,7 +7,7 @@ class Tesoro:
         self.defensa = defensa
         self.salud = salud
 
-    def encontrar_tesoro(self, heroe):
+    def encontrar_tesoro(self, heroe):      # modifica un stat del héroe de forma aleatoria
         opcion = random.randint(1, 3)
 
         if opcion == 1:

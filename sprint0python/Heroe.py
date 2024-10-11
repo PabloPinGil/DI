@@ -6,7 +6,7 @@ class Heroe:
         self.salud = salud
         self.salud_maxima = salud
 
-    def atacar(self, enemigo):
+    def atacar(self, enemigo):  # el héroe ataca al enemigo, y si el ataque es mayor que su defensa le daña
         print("El héroe ataca a " + enemigo.nombre)
 
         if self.ataque > enemigo.defensa:
@@ -15,21 +15,21 @@ class Heroe:
         else:
             print("El enemigo ha bloqueado el ataque.")
 
-    def curarse(self):
+    def curarse(self):  # el héroe se cura
         self.salud = self.salud + 10
-        if self.salud > self.salud_maxima:
+        if self.salud > self.salud_maxima:      # aquí se evita que se cure por encima de su salud máxima
             self.salud = self.salud_maxima
 
         print("El héroe se ha curado. Salud actual: " + str(self.salud))
 
-    def defenderse(self):
+    def defenderse(self):        # aumenta la defensa del héroe
         self.defensa = self.defensa + 5
         print("La defensa del héroe ha aumentado temporalmente a " + str(self.defensa))
 
-    def reset_defensa(self):
+    def reset_defensa(self):    # devuelve la defensa a su valor original
         self.defensa = self.defensa - 5
 
-    def esta_vivo(self):
+    def esta_vivo(self):        # comprueba si el héroe está vivo
         if self.salud > 0:
             return True
         else:
