@@ -15,13 +15,21 @@ class Mazmorra:
     def jugar(self):    # método principal
         ronda = 0
         victoria = True
+        opcion_combate = 0
 
         while ronda < len(self.monstruos):     # se ejecuta hasta matar a todos los enemigos o hasta que muera el héroe
             print("El héroe entra en la mazmorra")
             print("Te has encontrado con un " + self.monstruos[ronda].nombre)
 
             while self.heroe.esta_vivo() and self.monstruos[ronda].esta_vivo():
-                self.enfrentar_enemigo(self.monstruos[ronda])
+                opcion_combate = self.enfrentar_enemigo(self.monstruos[ronda])
+
+                if self.monstruos[ronda].esta_vivo():
+                    self.monstruos[ronda].atacar(self.heroe)
+
+                if opcion_combate == 2:
+                    self.heroe.reset_defensa()
+
 
             if not self.heroe.esta_vivo:
                 ronda = len(self.monstruos) + 1
@@ -60,6 +68,8 @@ class Mazmorra:
 
             else:
                 print("Opción no válida")
+
+            return opcion
 
     def buscar_tesoro(self):
         print("Buscando tesoro...")
