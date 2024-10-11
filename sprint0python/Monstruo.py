@@ -14,6 +14,8 @@ class Monstruo:
         print("El monstruo " + self.nombre + " ataca a " + heroe.nombre)
         if self.ataque > heroe.defensa:
             damage = self.ataque - heroe.defensa
+            heroe.salud = heroe.salud - damage
+
             print("El héroe " + heroe.nombre + " ha recibido " + damage + " puntos de daño")
         else:
             print("El héroe ha bloqueado el ataque")
