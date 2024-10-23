@@ -27,16 +27,17 @@ def un_jugador():  # Empieza la partida para un jugador
     etiqueta1.pack()
 
     entry = tk.Entry(frame)
-    eleccion_j1 = ""
-    boton_aceptar = tk.Button(frame, text="Aceptar", command=procesar_entrada)
+    eleccion_j1 = tk.StringVar()
+    boton_aceptar = tk.Button(frame, text="Aceptar", command=lambda: procesar_entrada(entry.get(), eleccion_j1))
     entry.pack()
     boton_aceptar.pack()
 
     eleccion_cpu = random.choice(["piedra", "papel", "tijeras"])
-    if eleccion_j1 == eleccion_cpu:
+    if eleccion_j1 == "error":
+        messagebox.showinfo("Error", "Opción no válida, vuelve a introducirla")
+    elif eleccion_j1 == eleccion_cpu:
         etiqueta_resultado.config(text=f"El jugador uno saca {eleccion_j1},"
                                        f" la CPU saca {eleccion_cpu}. Empate")
-
     elif ((eleccion_j1 == "piedra" and eleccion_cpu == "tijeras") or
           (eleccion_j1 == "papel" and eleccion_cpu == "piedra") or
           (eleccion_j1 == "tijeras" and eleccion_cpu == "papel")):
@@ -44,7 +45,6 @@ def un_jugador():  # Empieza la partida para un jugador
         etiqueta_resultado.config(text=f"El jugador uno saca {eleccion_j1},"
                                        f" la CPU saca {eleccion_cpu}. Gana el jugador 1.")
         victorias_jugador += 1
-
     else:
         etiqueta_resultado.config(text=f"El jugador uno saca {eleccion_j1},"
                                        f" la CPU saca {eleccion_cpu}. Gana la CPU.")
@@ -63,14 +63,18 @@ def un_jugador():  # Empieza la partida para un jugador
         messagebox.showinfo("Resultado", "Ha ganado la CPU")
         frame.destroy()
         seleccionar_modo()
-        
+
 
 def dos_jugadores():  # Empieza la partida para dos jugadores
     pass
 
 
-def procesar_entrada(entrada):  # Valida la entrada de una opcion
-    pass
+def procesar_entrada(entrada, resultado):  # Valida la entrada de una opcion
+    entrada = entrada.lower()
+    if entrada == "piedra" or entrada == "papel" or entrada == "tijeras":
+        resultado.set(entrada)
+    else:
+        resultado.set("error")
 
 
 # inicializamos la ventana y creamos el primer frame
