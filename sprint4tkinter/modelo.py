@@ -43,7 +43,7 @@ class GameModel:
 
                 # Descarga las imágenes para las cartas
                 for card_id in range((self.board_size * self.board_size) // 2):
-                    url = f"https://example.com/cards/{card_id}.png"
+                    url = f"https://github.com/PabloPinGil/DI/tree/main/sprint4tkinter/imagenes/{card_id}.png"
                     self.images[card_id] = descargar_imagen(url, (self.cell_size, self.cell_size))
                     if not self.images[card_id]:
                         raise Exception(f"Fallo al descargar la imagen con ID {card_id}.")
