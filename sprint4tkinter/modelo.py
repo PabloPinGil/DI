@@ -58,6 +58,11 @@ class GameModel:
     def images_are_loaded(self):
         return self.images_loaded.is_set()
 
+    def get_image_id(self, pos):
+        row, col = pos
+        card_id = self.board[row][col]  # Obtén el ID de la carta según la posición.
+        return self.images.get(card_id, self.hidden_image)  # Devuelve la imagen asociada o la oculta.
+
     def start_timer(self):
         self.start_time = time.time()
 
