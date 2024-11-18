@@ -54,7 +54,12 @@ class GameView:
         self.labels = []
         for row in range(model.board_size):
             for col in range(model.board_size):
-                label = tk.Label(self.window, width=model.cell_size // 10, height=model.cell_size // 20)
+                label = tk.Label(
+                    self.window,
+                    highlightbackground="black",  # Color del borde
+                    highlightthickness=2,  # Grosor del borde
+                    bd=0  # Ancho del borde interno (opcional)
+                )
                 label.grid(row=row, column=col, padx=2, pady=2)
                 label.bind("<Button-1>", lambda event, pos=(row, col): self.on_card_click_callback(pos))
                 self.labels.append(label)
@@ -69,13 +74,14 @@ class GameView:
 
     def update_board(self, pos, image_id):
         row, col = pos
-        idx = row * len(self.labels) + col
+        idx = row * int(len(self.labels) ** 0.5) + col
         self.labels[idx].config(image=image_id)
         self.labels[idx].image = image_id
 
     def reset_cards(self, pos1, pos2):
-        self.update_board(pos1, None)
-        self.update_board(pos2, None)
+        hidden_image = self.model.hidden_image  # Obtén la imagen oculta del modelo
+        self.update_board(pos1, hidden_image)
+        self.update_board(pos2, hidden_image)
 
     def update_move_count(self, moves):
         self.move_label.config(text=f"Movimientos: {moves}")

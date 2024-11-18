@@ -6,7 +6,7 @@ from recursos import descargar_imagen
 
 
 class GameModel:
-    def __init__(self, difficulty, player_name, cell_size=100):
+    def __init__(self, difficulty, player_name, cell_size=200):
         self.difficulty = difficulty
         self.player_name = player_name
         self.cell_size = cell_size
