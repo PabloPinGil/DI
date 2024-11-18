@@ -9,7 +9,11 @@ class GameModel:
     def __init__(self, difficulty, player_name, cell_size=200):
         self.difficulty = difficulty
         self.player_name = player_name
-        self.cell_size = cell_size
+        self.cell_size = {
+            "facil": 200,
+            "medio": 100,  
+            "dificil": 50
+        }[difficulty]
 
         # Configuración del tamaño del tablero según la dificultad
         self.board_size = {"facil": 4, "medio": 6, "dificil": 8}[difficulty]
