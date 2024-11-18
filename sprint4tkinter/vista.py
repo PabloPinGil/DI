@@ -33,7 +33,7 @@ class MainMenu:
 
         tk.Button(stats_window, text="Cerrar", command=stats_window.destroy).pack(pady=10)
 
-5
+
 class GameView:
     def __init__(self, on_card_click_callback, update_move_count_callback, update_time_callback):
         self.move_label = None

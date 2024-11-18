@@ -1,6 +1,6 @@
 facil:
+pablo,16,2024-11-18
 pablo,17,2024-11-18
 pablo,19,2024-11-18
-pablo,21,2024-11-18
 medio:
 dificil:
