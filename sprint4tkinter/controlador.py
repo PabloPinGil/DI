@@ -102,7 +102,6 @@ class GameController:
         self.view = None
         self.main_menu = MainMenu(
             self.root,
-            self.start_game_callback,
             self.show_stats_callback,
             self.quit_callback
         )
@@ -120,9 +119,3 @@ class GameController:
     def show_stats_callback(self):
         self.show_stats()
 
-# Punto de entrada
-if __name__ == "__main__":
-    root = tk.Tk()
-    root.title("Juego de Memoria")
-    controller = GameController(root)
-    root.mainloop()
