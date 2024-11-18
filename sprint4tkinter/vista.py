@@ -48,7 +48,7 @@ class GameView:
     def create_board(self, model):
         self.window = Toplevel()
         self.window.title("Juego de Memoria")
-        self.window.geometry(f"{model.board_size * model.cell_size}x{model.board_size * model.cell_size + 100}")
+        self.window.geometry(f"{model.board_size * model.cell_size + 100}x{model.board_size * model.cell_size + 100}")
 
         # Crear la cuadrícula de etiquetas (cartas)
         self.labels = []
@@ -60,6 +60,7 @@ class GameView:
                     highlightthickness=2,  # Grosor del borde
                     bd=0  # Ancho del borde interno (opcional)
                 )
+                label.config(image=model.hidden_image)
                 label.grid(row=row, column=col, padx=2, pady=2)
                 label.bind("<Button-1>", lambda event, pos=(row, col): self.on_card_click_callback(pos))
                 self.labels.append(label)
@@ -78,8 +79,7 @@ class GameView:
         self.labels[idx].config(image=image_id)
         self.labels[idx].image = image_id
 
-    def reset_cards(self, pos1, pos2):
-        hidden_image = self.model.hidden_image  # Obtén la imagen oculta del modelo
+    def reset_cards(self, pos1, pos2, hidden_image):
         self.update_board(pos1, hidden_image)
         self.update_board(pos2, hidden_image)
 

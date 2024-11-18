@@ -1,0 +1,6 @@
+facil:
+pablo,19,2024-11-18
+pablo,26,2024-11-18
+pablo,31,2024-11-18
+medio:
+dificil:

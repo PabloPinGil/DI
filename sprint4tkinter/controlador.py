@@ -72,7 +72,8 @@ class GameController:
             self.view.update_board(pos1, self.model.get_image_id(pos1))
             self.view.update_board(pos2, self.model.get_image_id(pos2))
         else:
-            self.root.after(1000, lambda: self.view.reset_cards(pos1, pos2))
+            self.root.after(1000, lambda: self.view.reset_cards(pos1, pos2, self.model.hidden_image))
+
         self.update_move_count(self.model.moves)
         self.selected = []
         self.check_game_complete()
