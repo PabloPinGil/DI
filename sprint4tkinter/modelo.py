@@ -12,7 +12,7 @@ class GameModel:
 
         self.board_size = {"facil": 4, "medio": 6, "dificil": 8}[difficulty]
 
-        base_size = 800  # Tamaño total deseado del tablero
+        base_size = 700  # Tamaño total deseado del tablero
         self.cell_size = base_size // self.board_size  # División entera
 
         # Configuración del tamaño del tablero según la dificultad
