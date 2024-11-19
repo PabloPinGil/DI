@@ -27,13 +27,15 @@ def un_jugador():  # Empieza la partida para un jugador
     etiqueta1.pack()
 
     entry = tk.Entry(frame)
-    eleccion_j1 = tk.StringVar()
-    boton_aceptar = tk.Button(frame, text="Aceptar", command=lambda: procesar_entrada(entry.get(), eleccion_j1))
+    global eleccion_j1
+    boton_aceptar = tk.Button(frame, text="Aceptar", command=lambda: procesar_entrada(entry.get()))
     entry.pack()
     boton_aceptar.pack()
 
     eleccion_cpu = random.choice(["piedra", "papel", "tijeras"])
-    if eleccion_j1 == "error":
+    if eleccion_j1 is None:
+        pass
+    elif eleccion_j1 == "error":
         messagebox.showinfo("Error", "Opción no válida, vuelve a introducirla")
     elif eleccion_j1 == eleccion_cpu:
         etiqueta_resultado.config(text=f"El jugador uno saca {eleccion_j1},"
@@ -69,12 +71,13 @@ def dos_jugadores():  # Empieza la partida para dos jugadores
     pass
 
 
-def procesar_entrada(entrada, resultado):  # Valida la entrada de una opcion
+def procesar_entrada(entrada):  # Valida la entrada de una opcion
+    global eleccion_j1
     entrada = entrada.lower()
     if entrada == "piedra" or entrada == "papel" or entrada == "tijeras":
-        resultado.set(entrada)
+        eleccion_j1 = entrada
     else:
-        resultado.set("error")
+        eleccion_j1 = "error"
 
 
 # inicializamos la ventana y creamos el primer frame
@@ -83,6 +86,8 @@ root.title("Piedra, papel, tijeras")
 root.geometry("500x500")
 frame_seleccion = tk.Frame(root)
 
+eleccion_j1 = None
+eleccion_j2 = None
 seleccionar_modo()
 
 root.mainloop()
