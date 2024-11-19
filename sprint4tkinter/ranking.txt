@@ -1,8 +1,0 @@
-facil:
-pablo,16,2024-11-18
-pablo,17,2024-11-18
-pablo,18,2024-11-19
-medio:
-pablo,63,2024-11-18
-dificil:
-pablo,152,2024-11-18
