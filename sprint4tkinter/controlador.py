@@ -4,6 +4,7 @@ from tkinter import messagebox, simpledialog
 from modelo import GameModel
 from vista import MainMenu, GameView
 
+
 class GameController:
     def __init__(self, root):
         self.root = root
