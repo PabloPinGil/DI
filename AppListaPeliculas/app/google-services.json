@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "831939619252",
+    "firebase_url": "https://app-lista-peliculas-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "app-lista-peliculas",
+    "storage_bucket": "app-lista-peliculas.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:831939619252:android:58b4539a44263f27192ae1",
+        "android_client_info": {
+          "package_name": "com.example.applistapeliculas"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAoJxsCSc1o9cUy5f870iBI31u_iBNxc_4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
