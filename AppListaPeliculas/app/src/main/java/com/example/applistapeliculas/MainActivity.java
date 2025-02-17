@@ -1,12 +1,13 @@
 package com.example.applistapeliculas;
 
+import android.content.Intent;
 import android.os.Bundle;
-import android.widget.EditText;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.applistapeliculas.DashboardActivity;
+import com.google.firebase.auth.FirebaseAuth;
 
 public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -14,39 +15,27 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
 
-        mAuth = FirebaseAuth.getInstance();
+        try {
+            // Inicializar Firebase
+            mAuth = FirebaseAuth.getInstance();
 
-        findViewById(R.id.registerButton).setOnClickListener(v -> registerUser());
-        findViewById(R.id.loginButton).setOnClickListener(v -> loginUser());
-    }
+            // Verificar estado de autenticación
+            if (mAuth.getCurrentUser() != null) {
+                // Usuario ya autenticado, ir al Dashboard
+                startActivity(new Intent(MainActivity.this, DashboardActivity.class));
+            } else {
+                // Usuario no autenticado, ir al Login
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            }
 
-    private void registerUser() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
+            // Cerrar MainActivity
+            finish();
 
-        mAuth.createUserWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "Usuario registrado correctamente.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Error en el registro: " + task.getException().getMessage(), Toast.LENGTH_SHORT).show();
-                    }
-                });
-    }
-
-    private void loginUser() {
-        String email = ((EditText) findViewById(R.id.emailEditText)).getText().toString();
-        String password = ((EditText) findViewById(R.id.passwordEditText)).getText().toString();
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, task -> {
-                    if (task.isSuccessful()) {
-                        Toast.makeText(MainActivity.this, "Inicio de sesión exitoso.", Toast.LENGTH_SHORT).show();
-                    } else {
-                        Toast.makeText(MainActivity.this, "Error en autenticación.", Toast.LENGTH_SHORT).show();
-                    }
-                });
+        } catch (Exception e) {
+            e.printStackTrace();
+            Toast.makeText(this, "Error de inicialización: " + e.getMessage(),
+                    Toast.LENGTH_LONG).show();
+        }
     }
 }
