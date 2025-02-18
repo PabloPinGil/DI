@@ -17,7 +17,7 @@ public class MovieRepository {
     private DatabaseReference databaseRef;
 
     public MovieRepository() {
-        databaseRef = FirebaseDatabase.getInstance().getReference();
+        databaseRef = FirebaseDatabase.getInstance().getReference("movies");
     }
 
     public void getMovies(MutableLiveData<List<Movie>> moviesLiveData) {
