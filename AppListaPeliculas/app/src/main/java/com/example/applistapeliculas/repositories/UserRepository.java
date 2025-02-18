@@ -39,9 +39,14 @@ public class UserRepository {
                         if (firebaseUser != null) {
                             user.setUid(firebaseUser.getUid());
                             saveUser(user, error, success);
+                        } else {
+                            // Añadir manejo cuando firebaseUser es null
+                            error.postValue("Error: No se pudo obtener el usuario");
                         }
                     } else {
                         error.postValue(task.getException().getMessage());
+                        // Aquí deberías evitar que success sea true
+                        success.postValue(false);  // Añadir esto
                     }
                 });
     }
