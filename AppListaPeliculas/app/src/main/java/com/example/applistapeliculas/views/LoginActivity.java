@@ -36,8 +36,9 @@ public class LoginActivity extends AppCompatActivity {
 
         viewModel.getLoginSuccess().observe(this, success -> {
             if (success) {
-                startActivity(new Intent(this, DashboardActivity.class));
-                finish();
+                // Navegar a MainActivity, que tiene el Toolbar y el contenedor de fragments
+                startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                finish(); // Finaliza LoginActivity para que no quede en el back stack
             }
         });
     }
