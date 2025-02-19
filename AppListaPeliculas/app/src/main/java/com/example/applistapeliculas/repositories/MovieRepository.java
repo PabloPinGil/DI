@@ -1,6 +1,7 @@
 package com.example.applistapeliculas.repositories;
 
 import androidx.annotation.NonNull;
+import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 
 import com.example.applistapeliculas.models.Movie;
@@ -15,18 +16,25 @@ import java.util.List;
 
 public class MovieRepository {
     private DatabaseReference databaseRef;
+    private MutableLiveData<List<Movie>> moviesLiveData = new MutableLiveData<>();
 
     public MovieRepository() {
         databaseRef = FirebaseDatabase.getInstance().getReference("movies");
+        loadMovies();
     }
 
-    public void getMovies(MutableLiveData<List<Movie>> moviesLiveData) {
+    public LiveData<List<Movie>> getMovies() { // Ahora no necesita parámetro
+        return moviesLiveData;
+    }
+
+    private void loadMovies() {
         databaseRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 List<Movie> movies = new ArrayList<>();
                 for (DataSnapshot movieSnapshot : snapshot.getChildren()) {
                     Movie movie = movieSnapshot.getValue(Movie.class);
+                    movie.setId(movieSnapshot.getKey());
                     movies.add(movie);
                 }
                 moviesLiveData.setValue(movies);
@@ -34,7 +42,7 @@ public class MovieRepository {
 
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                moviesLiveData.setValue(null);
             }
         });
     }
