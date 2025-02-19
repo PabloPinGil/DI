@@ -1,18 +1,19 @@
 package com.example.applistapeliculas.models;
 
 public class Movie {
+    private String id;
     private String title;
     private int year;
     private String director;
     private String description;
     private String url;
 
-    // Constructor vacío obligatorio para Firebase
-    public Movie() {
-    }
+    // Constructor vacío
+    public Movie() {}
 
-    // Constructor completo
-    public Movie(String title, int year, String director, String description, String url) {
+    // Modificar constructor completo
+    public Movie(String id, String title, int year, String director, String description, String url) {
+        this.id = id;
         this.title = title;
         this.year = year;
         this.director = director;
@@ -59,5 +60,13 @@ public class Movie {
 
     public void setUrl(String url) {
         this.url = url;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
     }
 }

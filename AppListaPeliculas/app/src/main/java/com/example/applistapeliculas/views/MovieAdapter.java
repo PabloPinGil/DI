@@ -1,5 +1,7 @@
 package com.example.applistapeliculas.views;
 
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -23,6 +25,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         void onMovieClick(Movie movie);
     }
 
+    // Constructor modificado (sin Context)
     public MovieAdapter(List<Movie> movies, OnMovieClickListener listener) {
         this.movies = movies;
         this.listener = listener;
@@ -31,6 +34,7 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
     @NonNull
     @Override
     public MovieViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        // Se usa correctamente DataBinding para inflar la vista
         MovieItemBinding binding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.getContext()),
                 R.layout.movie_item,
@@ -45,7 +49,19 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Movie movie = movies.get(position);
         holder.bind(movie);
 
-        holder.itemView.setOnClickListener(v -> listener.onMovieClick(movie));
+        holder.itemView.setOnClickListener(v -> {
+            Context context = holder.itemView.getContext();
+
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putExtra("movieId", movie.getId());
+            intent.putExtra("title", movie.getTitle());
+            intent.putExtra("year", movie.getYear());
+            intent.putExtra("director", movie.getDirector());
+            intent.putExtra("description", movie.getDescription());
+            intent.putExtra("url", movie.getUrl());
+
+            context.startActivity(intent);
+        });
     }
 
     @Override
@@ -69,6 +85,9 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         public void bind(Movie movie) {
             binding.setMovie(movie);
             binding.executePendingBindings();
+
+            String description = "Portada de " + movie.getTitle();
+            binding.ivPoster.setContentDescription(description);
 
             // Cargar imagen con Glide
             Glide.with(binding.getRoot())
