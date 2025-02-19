@@ -2,6 +2,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
+        <!-- Puedes declarar variables aquí si lo requieres -->
     </data>
 
     <androidx.drawerlayout.widget.DrawerLayout
@@ -9,11 +10,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <!-- Contenedor principal donde se cargarán los Fragments -->
-        <FrameLayout
-            android:id="@+id/fragmentContainer"
+        <!-- Contenido principal: CoordinatorLayout para gestionar el Toolbar y scrolling -->
+        <androidx.coordinatorlayout.widget.CoordinatorLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent">
+
+            <!-- AppBarLayout con la Toolbar -->
+            <com.google.android.material.appbar.AppBarLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+                <androidx.appcompat.widget.Toolbar
+                    android:id="@+id/toolbar"
+                    android:layout_width="match_parent"
+                    android:layout_height="?attr/actionBarSize"
+                    android:background="?attr/colorPrimary"
+                    app:title="App lista de películas"
+                    app:titleTextColor="@android:color/primary_text_light" />
+            </com.google.android.material.appbar.AppBarLayout>
+
+            <!-- Contenedor para cargar los Fragments -->
+            <FrameLayout
+                android:id="@+id/fragmentContainer"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:layout_behavior="@string/appbar_scrolling_view_behavior" />
+        </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
         <!-- NavigationView con el menú lateral -->
         <com.google.android.material.navigation.NavigationView
@@ -21,7 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_gravity="start"
-            app:menu="@menu/drawer_menu" />
-
+            app:menu="@menu/drawer_menu"
+            app:headerLayout="@layout/nav_header" />
     </androidx.drawerlayout.widget.DrawerLayout>
 </layout>
