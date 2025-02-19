@@ -41,8 +41,7 @@ public class DashboardFragment extends Fragment {
                         AppCompatDelegate.MODE_NIGHT_NO
         );
 
-        // Infla el layout utilizando data binding.
-        // Nota: Renombra el archivo XML a fragment_dashboard.xml para seguir la convención.
+        // Infla el layout utilizando Data Binding.
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_dashboard, container, false);
         return binding.getRoot();
     }
@@ -56,9 +55,6 @@ public class DashboardFragment extends Fragment {
         settingsViewModel = new ViewModelProvider(this, factory).get(SettingsViewModel.class);
         dashboardViewModel = new ViewModelProvider(this).get(DashboardViewModel.class);
 
-        // Configurar botón de cambio de tema
-        binding.btnThemeToggle.setOnClickListener(v -> settingsViewModel.toggleDarkMode());
-
         settingsViewModel.getDarkModeEnabled().observe(getViewLifecycleOwner(), isDarkMode -> {
             if (isDarkMode != (AppCompatDelegate.getDefaultNightMode() == AppCompatDelegate.MODE_NIGHT_YES)) {
                 AppCompatDelegate.setDefaultNightMode(
@@ -69,9 +65,6 @@ public class DashboardFragment extends Fragment {
         });
 
         setupRecyclerView();
-        setupUI();
-
-        binding.logoutButton.setOnClickListener(v -> logout());
     }
 
     private void setupRecyclerView() {
@@ -79,14 +72,22 @@ public class DashboardFragment extends Fragment {
 
         // Crear el adapter con la lista vacía y el listener de clicks
         MovieAdapter adapter = new MovieAdapter(new ArrayList<>(), movie -> {
-            Intent intent = new Intent(requireContext(), DetailActivity.class);
-            intent.putExtra("movieId", movie.getId());
-            intent.putExtra("title", movie.getTitle());
-            intent.putExtra("year", movie.getYear());
-            intent.putExtra("director", movie.getDirector());
-            intent.putExtra("description", movie.getDescription());
-            intent.putExtra("url", movie.getUrl());
-            startActivity(intent);
+            // Reemplazamos la navegación con Intent por una transacción de fragment
+            DetailFragment detailFragment = DetailFragment.newInstance(
+                    movie.getId(),
+                    movie.getTitle(),
+                    movie.getYear(),
+                    movie.getDirector(),
+                    movie.getDescription(),
+                    movie.getUrl()
+            );
+
+            // Realizar la transacción para mostrar el DetailFragment
+            requireActivity().getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.fragmentContainer, detailFragment)
+                    .addToBackStack(null) // Permite volver con el botón atrás
+                    .commit();
         });
 
         // Configurar el adapter en el RecyclerView
@@ -95,22 +96,11 @@ public class DashboardFragment extends Fragment {
         // Observar cambios en la lista de películas del ViewModel
         dashboardViewModel.getMoviesLiveData().observe(getViewLifecycleOwner(), movies -> {
             if (movies != null) {
-                adapter.setMovies(movies);
+                adapter.setMovies(movies); // Actualizar datos del adapter
             }
         });
     }
 
-    private void setupUI() {
-        binding.btnFavorites.setOnClickListener(v -> {
-            startActivity(new Intent(requireContext(), FavouritesActivity.class));
-        });
-    }
-
-    private void logout() {
-        FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(requireContext(), LoginActivity.class));
-        requireActivity().finish();
-    }
 
     @Override
     public void onDestroyView() {
@@ -118,4 +108,5 @@ public class DashboardFragment extends Fragment {
         binding = null;
     }
 }
+
 

@@ -49,19 +49,8 @@ public class MovieAdapter extends RecyclerView.Adapter<MovieAdapter.MovieViewHol
         Movie movie = movies.get(position);
         holder.bind(movie);
 
-        holder.itemView.setOnClickListener(v -> {
-            Context context = holder.itemView.getContext();
-
-            Intent intent = new Intent(context, DetailActivity.class);
-            intent.putExtra("movieId", movie.getId());
-            intent.putExtra("title", movie.getTitle());
-            intent.putExtra("year", movie.getYear());
-            intent.putExtra("director", movie.getDirector());
-            intent.putExtra("description", movie.getDescription());
-            intent.putExtra("url", movie.getUrl());
-
-            context.startActivity(intent);
-        });
+        // Se invoca el listener para manejar la navegación a DetailFragment
+        holder.itemView.setOnClickListener(v -> listener.onMovieClick(movie));
     }
 
     @Override

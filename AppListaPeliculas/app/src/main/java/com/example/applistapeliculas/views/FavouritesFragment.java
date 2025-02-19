@@ -52,18 +52,25 @@ public class FavouritesFragment extends Fragment {
 
     private void setupRecyclerView() {
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(requireContext()));
-        // Se crea un adapter con lista vacía y un listener vacío (se actualizará al observar datos).
-        MovieAdapter adapter = new MovieAdapter(new ArrayList<>(), movie -> {
-            // Listener por defecto vacío.
-        });
+        // Creamos el adapter con la lista vacía y el listener correcto
+        MovieAdapter adapter = new MovieAdapter(new ArrayList<>(), this::navigateToDetail);
         binding.recyclerView.setAdapter(adapter);
     }
 
     private void navigateToDetail(Movie movie) {
-        Intent intent = new Intent(requireContext(), DetailActivity.class);
-        intent.putExtra("movieId", movie.getId());
-        // Agrega el resto de extras que necesites
-        startActivity(intent);
+        DetailFragment detailFragment = DetailFragment.newInstance(
+                movie.getId(),
+                movie.getTitle(),
+                movie.getYear(),
+                movie.getDirector(),
+                movie.getDescription(),
+                movie.getUrl()
+        );
+        requireActivity().getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.fragmentContainer, detailFragment)
+                .addToBackStack(null)
+                .commit();
     }
 
     private void observeData() {
@@ -74,7 +81,7 @@ public class FavouritesFragment extends Fragment {
                 adapter = new MovieAdapter(movies, this::navigateToDetail);
                 binding.recyclerView.setAdapter(adapter);
             } else {
-                adapter.setMovies(movies); // Actualizar siempre el adaptador
+                adapter.setMovies(movies); // Actualizar el adapter
             }
         });
     }
@@ -85,4 +92,5 @@ public class FavouritesFragment extends Fragment {
         binding = null;
     }
 }
+
 

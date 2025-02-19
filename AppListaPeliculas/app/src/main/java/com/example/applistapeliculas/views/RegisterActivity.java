@@ -43,11 +43,15 @@ public class RegisterActivity extends AppCompatActivity {
 
         viewModel.getRegisterSuccess().observe(this, success -> {
             if (success) {
-                startActivity(new Intent(this, DashboardActivity.class));
-                finish();
+                // Reemplazamos la navegación a DashboardActivity por una transacción a DashboardFragment
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.fragmentContainer, new DashboardFragment())
+                        .commit();
             }
         });
     }
+
 
     private void setupUI() {
         binding.registerButton.setOnClickListener(v -> {
